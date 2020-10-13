@@ -1,0 +1,33 @@
+<?php
+$f=fopen($_SERVER['argv'][1],'r');
+fscanf($f,"%d",$n);
+for($i=0;$i<$n;$i++){
+    fscanf($f,"%d%d%d",$e[$i],$p[$i],$s[$i]);
+}fclose($f);
+for($j=0;;$j++){
+    echo"Input usage unit(-1 for exit): ";
+    fscanf(STDIN,"%d",$u);
+    if($u==-1){
+        exit;
+    }$b=0;
+    for($i=0;$i<$n;$i++){
+        if($u<$s[0]){
+            $b=0;
+        }else{
+            if($u<=$e[$i]||$i==$n-1){
+                if($s[$i]==1){
+                    $b+=$p[0];
+                }elseif($s[$i]==0){
+                    $b+=$p[$i]*$u;
+                }break;
+            }elseif($u>$e[$i]){
+                $u-=$e[$i];
+                if($s[$i]==1){
+                    $b+=$p[0];
+                }elseif($s[$i]==0){
+                    $b+=$p[$i]*$e[$i];
+                }
+            }
+        }
+    }echo"Price of electricity bill = ",$b,"\n";
+}
