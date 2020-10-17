@@ -1,16 +1,27 @@
 <?php
-$m=$_SERVER['argv'][1];
-for($k=0;;$k++){
-    echo"Input size (0 for exit): ";
-    fscanf(STDIN,"%d",$n);
-    if($n==0){
-        exit;
-    }for($i=0;$i<=$n-2;$i++){
-        $row[$i]=$i+2;
-    }for($j=1;$j<=$m;$j++){
-        for($i=0;$i<=$n-2;$i++){
-            printf("%5d",$row[$i]*$j);
-        }echo"\n";
+/*ID: 602110195
+Name: Zhang Hao(Henry)
+Wechat: hikki*/
+class mul{
+    private $row;
+    private $num;
+    function __construct($row,$num){
+        $this->row=$row;
+        $this->num=$num;
+    }function print($n){
+        for($i=1;$i<=$this->row;$i++){
+            for($j=2;$j<=$n;$j++){
+                printf("%5d",$j*$i);
+            }echo"\n";
+        } 
     }
+}while(true){
+    echo"Input size (0 for exit):";
+    fscanf(STDIN,"%d",$num);
+    $row=$_SERVER['argv'][1];
+    if($num==0){
+        break;
+    }$n=new mul($row,$num);
+    $n->print($num);
 }
 ?>

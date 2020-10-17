@@ -1,51 +1,67 @@
 <?php
-for($h=0;;$h++){
+/*ID: 602110195
+Name: Zhang Hao(Henry)
+Wechat: hikki*/
+class mul{
+    private $row;
+    private $num;
+    function __construct($row,$num){
+        $this->row=$row;
+        $this->num=$num;
+    }function print($n){
+        for($i=1;$i<=$this->row;$i++){
+            for($j=2;$j<=$n;$j++){
+                printf("%5d",$j*$i);
+            }echo"\n";
+        } 
+    }
+}class bill{
+    private $prices;
+    private $unit;
+    function __construct($pricess,$unit){
+        $this->pricess=$pricess;
+        $pricess=[];
+        $this->unit=$unit;
+    }function priceofbill($unit){
+        $price=0;
+	    for($i=0;$unit>0;$i++){
+		    $units=($unit>$this->pricess[$i]['unit']&&$this->pricess[$i]['unit']!=0)?$this->pricess[$i]['unit']:$unit;
+	    	$price+=($this->pricess[$i]['judge']==1)?$this->pricess[$i]['price']:$units*$this->pricess[$i]['price'];
+	    	$unit-=$units;
+	    }echo"price of electricity bill = ",$price,"\n";
+    }
+}class App{
+    private $mn;
+    function __construct($mn){
+        $this->mn=$mn;
+    }function run($mn){
+        if($this->mn==1){
+            echo"Input size :";
+            fscanf(STDIN,"%d",$num);
+            $row=15;
+            $n=new mul($row,$num);
+            $n->print($num);
+        }elseif($this->mn==2){
+            $f=fopen("ass-03-pricing-data.txt",'r');
+            fscanf($f,"%d",$n);
+            for($i=0;$i<$n;$i++){
+                fscanf($f,"%d%d%d",$prices['unit'],$prices['price'],$prices['judge']);
+                $pricess[]=$prices;
+            }fclose($f);
+            echo"Input usage unit: ";
+            fscanf(STDIN,"%d",$unit);
+            $bill=new bill($pricess,$unit);
+            $bill->priceofbill($unit);
+        }else{
+            echo"Invalid menu number ",$mn,"!!!";
+        }
+    }
+}while(true){
     echo"\n      1. Multiplication Table\n      2. Electricity Bill calculation\n      3. exit\n\nInput menu number: ";
     fscanf(STDIN,"%d",$mn);
-    if($mn==1){
-        $m=15;
-        echo"Input size: ";
-        fscanf(STDIN,"%d",$n);
-        for($i=0;$i<=$n-2;$i++){
-            $row[$i]=$i+2;
-        }for($j=1;$j<=$m;$j++){
-            for($i=0;$i<=$n-2;$i++){
-                printf("%5d",$row[$i]*$j);
-            }echo"\n";
-        }
-    }elseif($mn==2){
-        $f=fopen("ass-03-pricing-data.txt",'r');
-        fscanf($f,"%d",$n);
-        for($i=0;$i<$n;$i++){
-            fscanf($f,"%d%d%d",$e[$i],$p[$i],$s[$i]);
-        }fclose($f);
-        echo"Input usage unit: ";
-        fscanf(STDIN,"%d",$u);
-        $b=0;
-        for($i=0;$i<$n;$i++){
-            if($u<$s[0]){
-                $b=0;
-            }else{
-                if($u<=$e[$i]||$i==$n-1){
-                    if($s[$i]==1){
-                        $b+=$p[0];
-                    }elseif($s[$i]==0){
-                        $b+=$p[$i]*$u;
-                    }break;
-                }elseif($u>$e[$i]){
-                    $u-=$e[$i];
-                    if($s[$i]==1){
-                        $b+=$p[0];
-                    }elseif($s[$i]==0){
-                        $b+=$p[$i]*$e[$i];
-                    }
-                }
-            }
-        }echo"Price of electricity bill = ",$b,"\n";
-    }elseif($mn==3){
-        exit;
-    }else{
-        echo"Invalid menu number ",$mn,"!!!";
-    }
+    if($mn==3){
+        break;
+    }$app=new App($mn);
+    $app->run($mn);
 }
 ?>
